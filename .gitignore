@@ -1,0 +1,14 @@
+.idea
+.DS_Store
+
+disks/*
+
+.chia
+.chia_keys
+
+.chiadog/*
+!.chiadog/config.example.yaml
+
+logs/*
+
+docker-compose.override.yml

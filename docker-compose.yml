@@ -1,0 +1,109 @@
+version: "3.6"
+
+services:
+  chia:
+    image: ghcr.io/chia-network/chia:latest
+    container_name: chia
+    restart: unless-stopped
+    environment:
+      - keys=persistent
+      - TZ=Europe/Madrid
+      - log_level=INFO
+      - log_to_file=true
+    volumes:
+      - ./.chia:/root/.chia
+      - ./.chia_keys:/root/.chia_keys
+      - ./disks:/disks
+      - ./scripts/add-nodes.sh:/scripts/add-nodes.sh
+    ports:
+      - "8444:8444"
+      - "55400:55400"
+
+  chiadog:
+    image: artjacobson/chiadog-docker:latest
+    container_name: chiadog
+    restart: unless-stopped
+    volumes:
+      - ./.chiadog:/root/.chiadog
+      - ./.chia/mainnet/log:/root/.chia/mainnet/log:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  scrutiny:
+    image: lscr.io/linuxserver/scrutiny
+    container_name: scrutiny
+    restart: unless-stopped
+    cap_add:
+      - SYS_RAWIO
+    environment:
+      - TZ=Europe/Madrid
+      - SCRUTINY_API_ENDPOINT=http://localhost:8080
+      - SCRUTINY_WEB=true
+      - SCRUTINY_COLLECTOR=true
+    volumes:
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/sda:/dev/sda
+      - /dev/sdb:/dev/sdb
+      - /dev/sdc:/dev/sdc
+      - /dev/sdd:/dev/sdd
+      - /dev/sde:/dev/sde
+      - /dev/sdf:/dev/sdf
+      - /dev/sdg:/dev/sdg
+    ports:
+      - "81:8080"
+
+  proxy:
+    image: tecnativa/docker-socket-proxy
+    container_name: docker_socket_proxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - CONTAINERS=1
+
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    hostname: chia
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    environment:
+      - DOCKER_HOST=proxy:2375
+      - NETDATA_CLAIM_TOKEN=replace_me
+      - NETDATA_CLAIM_URL=https://app.netdata.cloud
+      - NETDATA_CLAIM_ROOMS=replace_me
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+    ports:
+      - "82:19999"
+
+  samba:
+    image: dperson/samba:latest
+    container_name: samba
+    restart: on-failure
+    environment:
+      - TZ=Europe/Madrid
+      - USERID=1001
+      - GROUPID=1001
+    command: '-s "chia-fd-x;/chia-fd-x;yes;no;no;chia" -u "chia;chia" -G "chia-fd-x;create mask = 0755" -G "chia-fd-x;force create mode = 0755" -r -p'
+    volumes:
+      - ./disks/chia-fd-6:/chia-fd-x
+    ports:
+      - "139:139/tcp"
+      - "445:445/tcp"
+
+volumes:
+  netdataconfig:
+  netdatalib:
+  netdatacache:

@@ -1,0 +1,25 @@
+notification_title_prefix: 'Chia'
+log_level: INFO
+
+chia_logs:
+  file_log_consumer:
+    enable: true
+    file_path: '~/.chia/mainnet/log/debug.log'
+
+daily_stats:
+  enable: true
+  time_of_day: "07:00"
+  frequency_hours: 24
+
+notifier:
+  telegram:
+    enable: true
+    daily_stats: true
+    wallet_events: true
+    credentials:
+      bot_token: 'replace_me'
+      chat_id: 'replace_me'
+
+keep_alive_monitor:
+  enable_remote_ping: true
+  ping_url: 'replace_me'
