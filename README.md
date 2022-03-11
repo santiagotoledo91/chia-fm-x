@@ -42,10 +42,6 @@ This guide will help you to set up a Raspberry Pi 4 8GB to run as a Chia farmer
   ```shell
   docker-compose up -d
   ```
-- Chown the chia folders
-  ```shell
-  sudo chown -R pi:pi .chia*
-  ```
 - Add your keys
   ```shell
   ${chia} keys add

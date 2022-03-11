@@ -4,6 +4,7 @@ services:
   chia:
     image: ghcr.io/chia-network/chia:latest
     container_name: chia
+    user: "1000:1000"
     restart: unless-stopped
     environment:
       - keys=persistent
@@ -42,14 +43,6 @@ services:
       - SCRUTINY_COLLECTOR=true
     volumes:
       - /run/udev:/run/udev:ro
-    devices:
-      - /dev/sda:/dev/sda
-      - /dev/sdb:/dev/sdb
-      - /dev/sdc:/dev/sdc
-      - /dev/sdd:/dev/sdd
-      - /dev/sde:/dev/sde
-      - /dev/sdf:/dev/sdf
-      - /dev/sdg:/dev/sdg
     ports:
       - "81:8080"
 
@@ -71,9 +64,7 @@ services:
       - SYS_PTRACE
     environment:
       - DOCKER_HOST=proxy:2375
-      - NETDATA_CLAIM_TOKEN=replace_me
       - NETDATA_CLAIM_URL=https://app.netdata.cloud
-      - NETDATA_CLAIM_ROOMS=replace_me
     security_opt:
       - apparmor=unconfined
     volumes:
@@ -97,8 +88,6 @@ services:
       - USERID=1001
       - GROUPID=1001
     command: '-s "chia-fd-x;/chia-fd-x;yes;no;no;chia" -u "chia;chia" -G "chia-fd-x;create mask = 0755" -G "chia-fd-x;force create mode = 0755" -r -p'
-    volumes:
-      - ./disks/chia-fd-6:/chia-fd-x
     ports:
       - "139:139/tcp"
       - "445:445/tcp"

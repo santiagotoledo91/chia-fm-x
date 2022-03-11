@@ -3,8 +3,8 @@
 
 disks/*
 
-.chia
-.chia_keys
+.chia/*
+.chia_keys/*
 
 .chiadog/*
 !.chiadog/config.example.yaml
