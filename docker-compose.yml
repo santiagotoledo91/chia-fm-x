@@ -4,8 +4,8 @@ services:
   chia:
     image: ghcr.io/chia-network/chia:latest
     container_name: chia
-    user: "1000:1000"
     restart: unless-stopped
+    user: 1000:1000
     environment:
       - keys=persistent
       - TZ=Europe/Madrid
@@ -15,7 +15,7 @@ services:
       - ./.chia:/root/.chia
       - ./.chia_keys:/root/.chia_keys
       - ./disks:/disks
-      - ./scripts/add-nodes.sh:/scripts/add-nodes.sh
+      - ./scripts/chia--add-nodes.sh:/scripts/chia--add-nodes.sh
     ports:
       - "8444:8444"
       - "55400:55400"
@@ -85,8 +85,8 @@ services:
     restart: on-failure
     environment:
       - TZ=Europe/Madrid
-      - USERID=1001
-      - GROUPID=1001
+      - USERID=1000
+      - GROUPID=1000
     command: '-s "chia-fd-x;/chia-fd-x;yes;no;no;chia" -u "chia;chia" -G "chia-fd-x;create mask = 0755" -G "chia-fd-x;force create mode = 0755" -r -p'
     ports:
       - "139:139/tcp"

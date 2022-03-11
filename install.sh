@@ -35,13 +35,11 @@ alias chia-wallet-show="\${CHIA} wallet show"
 alias chia-logs="\${DOCKER_COMPOSE} logs -tf --tail="50" chia"
 alias chia-logs-wallet="\${DOCKER_COMPOSE} logs -tf --tail="50" chia | grep --color=never 'wallet'"
 alias chia-logs-blockchain="\${DOCKER_COMPOSE} logs -tf --tail="50" chia | grep --color=never 'Added blocks'"
-alias chia-add-nodes="\${DOCKER_COMPOSE} exec -d chia /scripts/add-nodes.sh"
-alias chia--backup="bash ~/chia/scripts/backup.sh"
-alias chia--restore-all="bash ~/chia/scripts/restore.sh true true"
-alias chia--restore-wallet="bash ~/chia/scripts/restore.sh true false"
-alias chia--restore-blockchain="bash ~/chia/scripts/restore.sh false true"
+alias chia--add-nodes="\${DOCKER_COMPOSE} exec -d chia /scripts/chia--add-nodes.sh"
+alias chia--backup="bash ~/chia/scripts/chia--backup.sh"
+alias chia--restore="bash ~/chia/scripts/chia--restore.sh"
 
-alias scrutiny-collect-metrics="docker-compose exec scrutiny scrutiny-collector-metrics run"
+alias scrutiny--update="bash ~/chia/scripts/scrutiny--update.sh"
 EOT
 fi
 
@@ -49,7 +47,7 @@ echo "${GREEN}-> Installing needed packages${NC}"
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y vim nmap smartmontools docker.io docker-compose
+sudo apt install -y vim nmap smartmontools docker.io docker-compose sqlite3
 sudo apt autoclean
 sudo apt autoremove
 
