@@ -19,7 +19,7 @@ echo "$(date) | ${GREEN}Starting restore${NC}"
 echo "$(date) | ${GREEN}-> Stopping chia${NC}"
 ${DOCKER_COMPOSE} stop chia
 
-echo "$(date) | ${GREEN}-> Clearing current db${NC}"
+echo "$(date) | ${GREEN}-> Removing current db files${NC}"
 rm -f "${DB_CURRENT_FILE}*"
 
 echo "$(date) | ${GREEN}-> Restoring backup from ${DB_BACKUP_FILE} to ${DB_CURRENT_FILE}${NC}"
