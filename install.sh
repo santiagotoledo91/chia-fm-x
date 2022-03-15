@@ -52,7 +52,7 @@ echo "${GREEN}-> Installing needed packages${NC}"
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y vim nmap smartmontools docker.io docker-compose sqlite3
+sudo apt install -y vim nmap smartmontools docker.io docker-compose sqlite3 screen
 sudo apt autoclean
 sudo apt autoremove
 
