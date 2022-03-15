@@ -7,6 +7,11 @@ NC=$'\e[0m' # No Color
 
 echo "${GREEN}Installing...${NC}"
 
+if grep -q "CONF_SWAPSIZE=100" /etc/dphys-swapfile; then
+  echo "${GREEN}-> Increasing swap to 2GB (Max recommended for Raspberry Pi OS Lite 64 bits)${NC}"
+  sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=2048/g' /etc/dphys-swapfile
+fi
+
 if ! grep -q -E "^docker:" /etc/group; then
   echo "${GREEN}-> Creating the 'docker' group${NC}"
   sudo groupadd docker
