@@ -5,7 +5,6 @@ services:
     image: ghcr.io/chia-network/chia:latest
     container_name: chia
     restart: unless-stopped
-    user: 1000:1000
     environment:
       - keys=persistent
       - TZ=Europe/Madrid
