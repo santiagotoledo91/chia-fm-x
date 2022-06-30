@@ -7,13 +7,13 @@ services:
 
   scrutiny:
     devices:
-      - /dev/sda:/dev/sda
-      - /dev/sdb:/dev/sdb
-      - /dev/sdc:/dev/sdc
-      - /dev/sdd:/dev/sdd
-      - /dev/sde:/dev/sde
-      - /dev/sdf:/dev/sdf
-      - /dev/sdg:/dev/sdg
+      - "/dev/sda"
+      - "/dev/sdb"
+      - "/dev/sdc"
+      - "/dev/sdd"
+      - "/dev/sde"
+      - "/dev/sdf"
+      - "/dev/sdg"
 
   netdata:
     environment:

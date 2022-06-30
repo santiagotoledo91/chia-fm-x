@@ -48,7 +48,7 @@ alias chia--backup="bash ~/chia/scripts/chia--backup.sh"
 alias chia--restore="bash ~/chia/scripts/chia--restore.sh"
 alias chia--update="${DOCKER_COMPOSE} stop chia && ${DOCKER_COMPOSE} pull chia && ${DOCKER_COMPOSE} up --build -d chia"
 
-alias scrutiny-collect-metrics="bash ~/chia/scripts/scrutiny--update.sh"
+alias scrutiny-collect-metrics="bash ~/chia/scripts/scrutiny-collect-metrics.sh"
 alias scrutiny--update="${DOCKER_COMPOSE} stop scrutiny && ${DOCKER_COMPOSE} pull scrutiny && ${DOCKER_COMPOSE} up --build -d scrutiny"
 EOT
 fi
