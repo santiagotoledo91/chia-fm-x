@@ -9,6 +9,8 @@ disks/*
 .chiadog/*
 !.chiadog/config.example.yaml
 
+.scrutiny/*
+
 logs/*
 
 docker-compose.override.yml
