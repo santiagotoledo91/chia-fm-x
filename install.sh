@@ -36,15 +36,20 @@ alias bash-reload="source ~/.profile"
 alias chia-enter="\${DOCKER_COMPOSE} exec chia bash"
 alias chia-status="\${CHIA} show -s"
 alias chia-farm-summary="\${CHIA} farm summary"
+alias chia-wallet-get-address="${CHIA} wallet get_address"
 alias chia-wallet-show="\${CHIA} wallet show"
 alias chia-logs="\${DOCKER_COMPOSE} logs -tf --tail="50" chia"
 alias chia-logs-wallet="\${DOCKER_COMPOSE} logs -tf --tail="50" chia | grep --color=never 'wallet'"
 alias chia-logs-blockchain="\${DOCKER_COMPOSE} logs -tf --tail="50" chia | grep --color=never 'Added blocks'"
+alias chia-logs-backup="cat ~/chia/logs/chia--backup.log"
+
 alias chia--add-nodes="\${DOCKER_COMPOSE} exec -d chia /scripts/chia--add-nodes.sh"
 alias chia--backup="bash ~/chia/scripts/chia--backup.sh"
 alias chia--restore="bash ~/chia/scripts/chia--restore.sh"
+alias chia--update="${DOCKER_COMPOSE} stop chia && ${DOCKER_COMPOSE} pull chia && ${DOCKER_COMPOSE} up --build -d chia"
 
-alias scrutiny--update="bash ~/chia/scripts/scrutiny--update.sh"
+alias scrutiny-collect-metrics="bash ~/chia/scripts/scrutiny--update.sh"
+alias scrutiny--update="${DOCKER_COMPOSE} stop scrutiny && ${DOCKER_COMPOSE} pull scrutiny && ${DOCKER_COMPOSE} up --build -d scrutiny"
 EOT
 fi
 

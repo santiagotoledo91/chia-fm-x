@@ -62,7 +62,7 @@ This guide will help you to set up a Raspberry Pi 4 8GB to run as a Chia farmer
 - Add the following entries
   ```shell
   0 6 * * * ~/chia/scripts/chia--backup.sh >> ~/chia/logs/chia--backup.log 2>&1
-  0 0 * * * ~/chia/scripts/scrutiny--update.sh >> ~/chia/logs/scrutiny--update.log 2>&1
+  0 0 * * * ~/chia/scripts/scrutiny-collect-metrics.sh >> ~/chia/logs/scrutiny-collect-metrics.log 2>&1
   ```
 ## Monitoring
 ### Scrutini (S.M.A.R.T)
