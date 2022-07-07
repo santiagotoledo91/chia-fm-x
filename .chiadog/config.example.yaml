@@ -11,11 +11,26 @@ daily_stats:
   time_of_day: "07:00"
   frequency_hours: 24
 
+handlers:
+  wallet_added_coin_handler:
+    enable: true
+    min_mojos_amount:  5
+  finished_signage_point_handler:
+    enable: true
+  block_handler:
+    enable: true
+  partial_handler:
+    enable: true
+  harvester_activity_handler:
+    enable: true
+
 notifier:
   telegram:
     enable: true
     daily_stats: true
     wallet_events: true
+    decreasing_plot_events: true
+    increasing_plot_events: true
     credentials:
       bot_token: 'replace_me'
       chat_id: 'replace_me'
@@ -23,3 +38,4 @@ notifier:
 keep_alive_monitor:
   enable_remote_ping: true
   ping_url: 'replace_me'
+

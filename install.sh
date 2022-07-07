@@ -50,6 +50,8 @@ alias chia--update="${DOCKER_COMPOSE} stop chia && ${DOCKER_COMPOSE} pull chia &
 
 alias scrutiny-collect-metrics="bash ~/chia/scripts/scrutiny-collect-metrics.sh"
 alias scrutiny--update="${DOCKER_COMPOSE} stop scrutiny && ${DOCKER_COMPOSE} pull scrutiny && ${DOCKER_COMPOSE} up --build -d scrutiny"
+
+alias chiadog--update="${DOCKER_COMPOSE} stop chiadog && ${DOCKER_COMPOSE} pull chiadog && ${DOCKER_COMPOSE} up --build -d chiadog"
 EOT
 fi
 

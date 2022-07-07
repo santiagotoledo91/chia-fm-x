@@ -20,7 +20,8 @@ services:
       - "55400:55400"
 
   chiadog:
-    image: artjacobson/chiadog-docker:latest
+    build:
+      context: https://github.com/martomi/chiadog.git#main
     container_name: chiadog
     restart: unless-stopped
     volumes:
