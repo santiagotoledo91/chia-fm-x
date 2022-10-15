@@ -3,7 +3,6 @@ version: "3.6"
 services:
   chia:
     image: ghcr.io/chia-network/chia:latest
-    container_name: chia
     restart: unless-stopped
     environment:
       - keys=persistent
@@ -22,7 +21,6 @@ services:
   chiadog:
     build:
       context: https://github.com/martomi/chiadog.git#main
-    container_name: chiadog
     restart: unless-stopped
     volumes:
       - ./.chiadog:/root/.chiadog
@@ -32,7 +30,6 @@ services:
 
   scrutiny:
     image: ghcr.io/analogj/scrutiny:master-omnibus
-    container_name: scrutiny
     restart: unless-stopped
     cap_add:
       - SYS_RAWIO
@@ -47,7 +44,6 @@ services:
 
   proxy:
     image: tecnativa/docker-socket-proxy
-    container_name: docker_socket_proxy
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -56,7 +52,6 @@ services:
 
   netdata:
     image: netdata/netdata
-    container_name: netdata
     hostname: chia
     restart: unless-stopped
     cap_add:
@@ -80,7 +75,6 @@ services:
 
   samba:
     image: dperson/samba:latest
-    container_name: samba
     restart: on-failure
     environment:
       - TZ=Europe/Madrid

@@ -6,7 +6,7 @@ This guide will help you to set up a Raspberry Pi 4 8GB to run as a Chia farmer
 
 ### Hardware
 - Raspberry Pi 4 8GB
-- 120GB SSD or more connected over USB
+- 240GB SSD or more connected over USB
 #### Software
 - Raspberry Pi imager
 
