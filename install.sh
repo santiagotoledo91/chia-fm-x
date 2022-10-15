@@ -71,9 +71,9 @@ sudo apt autoremove
 #sudo ufw allow from 192.168.31.202 to any port 55400 proto tcp comment "Chia UI @ MacBook Pro"
 #sudo ufw enable
 
-if ! grep -q "174c:1153:u,0bc2:3343:u" /boot/cmdline.txt; then
+if ! grep -q "cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1 usb-storage.quirks=174c:1153:u,0bc2:3343:u" /boot/cmdline.txt; then
   echo "${GREEN}-> Disabling UAS (Seagate 8TB disks S.M.A.R.T problem and slow SATA/USB 3.0 adapter fix)${NC}"
-  echo "usb-storage.quirks=174c:1153:u,0bc2:3343:u $(cat /boot/cmdline.txt)" | sudo tee /boot/cmdline.txt
+  echo "cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1 usb-storage.quirks=174c:1153:u,0bc2:3343:u $(cat /boot/cmdline.txt)" | sudo tee /boot/cmdline.txt
 fi
 
 if grep -q "# Overclocking and disabling Wi-Fi and Bluetooth" /boot/config.txt; then
