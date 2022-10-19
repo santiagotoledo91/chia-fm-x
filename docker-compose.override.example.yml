@@ -6,6 +6,10 @@ services:
       - plots_dir=/disks/chia-fd-1/plots /disks/chia-fd-2/plots /disks/chia-fd-3/plots /disks/chia-fd-4/plots /disks/chia-fd-5/plots /disks/chia-fd-6/plots
 
   scrutiny:
+    hostname: chia__scrutiny
+    ports:
+      - "8080:8080" # webapp
+      - "8086:8086" # influxDB admin
     devices:
       - "/dev/sda"
       - "/dev/sdb"
@@ -16,6 +20,9 @@ services:
       - "/dev/sdg"
 
   netdata:
+    hostname: chia__netdata
+    ports:
+      - "82:19999"
     environment:
       - NETDATA_CLAIM_TOKEN=replace_me
       - NETDATA_CLAIM_ROOMS=replace_me
